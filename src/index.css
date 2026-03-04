@@ -96,10 +96,46 @@
 
   body {
     @apply bg-background text-foreground;
+    overflow-x: hidden;
+  }
+
+  html {
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+  }
+  
+  /* Hardware acceleration for better performance */
+  * {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  /* Force GPU acceleration on animated elements */
+  .animate-fade-in-up,
+  .animate-fade-in,
+  .animate-slide-in-left,
+  .animate-slide-in-right,
+  .animate-scale-in,
+  .animate-float,
+  .animate-glow-pulse,
+  .animate-gradient-x {
+    will-change: transform, opacity;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
   }
 }
 
 html {
+  scroll-behavior: smooth;
+}
+
+/* Add smooth momentum scrolling for webkit browsers */
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
   scroll-behavior: smooth;
 }
 
@@ -238,6 +274,64 @@ html {
     opacity: 0.3;
     text-shadow: none;
   }
+}
+
+@keyframes gradient-shift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes wave-flow {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.6;
+  }
+  33% {
+    transform: translateY(-10px) scale(1.05);
+    opacity: 0.8;
+  }
+  66% {
+    transform: translateY(5px) scale(0.95);
+    opacity: 0.7;
+  }
+}
+
+/* Typewriter foggy glow effect */
+.typewriter-glow {
+  text-shadow: 
+    0 0 20px rgba(66, 133, 244, 0.8),
+    0 0 40px rgba(66, 133, 244, 0.6),
+    0 0 60px rgba(66, 133, 244, 0.4),
+    0 0 80px rgba(66, 133, 244, 0.3),
+    0 0 100px rgba(66, 133, 244, 0.2);
+  filter: drop-shadow(0 0 30px rgba(66, 133, 244, 0.5));
+}
+
+/* Typewriter gradient glow effect - multi-color */
+.typewriter-glow-gradient {
+  filter: 
+    drop-shadow(0 0 20px rgba(234, 67, 53, 0.6))
+    drop-shadow(0 0 30px rgba(66, 133, 244, 0.6))
+    drop-shadow(0 0 40px rgba(52, 168, 83, 0.6))
+    drop-shadow(0 0 50px rgba(251, 188, 5, 0.6));
+  position: relative;
+}
+
+.typewriter-glow-gradient::before {
+  content: attr(data-text);
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+  background: linear-gradient(to right, #EA4335, #4285F4, #34A853, #FBBC05);
+  -webkit-background-clip: text;
+  background-clip: text;
+  filter: blur(20px);
+  opacity: 0.8;
 }
 
 .animate-fade-in-up {

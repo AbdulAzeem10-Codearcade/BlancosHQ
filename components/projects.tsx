@@ -3,7 +3,6 @@
 import { ArrowUpRight, Users, TrendingUp, Clock, Star } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 import { SectionGlow } from "./section-glow"
-import ScrollFloat from "./ui/scroll-float"
 
 const projects = [
   {
@@ -102,23 +101,23 @@ export function Projects() {
   const { ref, isInView } = useInView()
 
   return (
-    <section id="projects" ref={ref} className="relative bg-background py-24 md:py-32">
+    <section id="projects" ref={ref} className="relative bg-[#000000] py-24 md:py-32">
       <SectionGlow variant="projects" />
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div
-            className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-[#28292a] px-4 py-1.5 text-sm font-medium text-[#8ab4f8] ${isInView ? "animate-fade-in-up" : "opacity-0"
+            className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-card px-4 py-1.5 text-sm font-medium text-[#9aa0a6] animate-fast-blink ${isInView ? "animate-fade-in-up" : "opacity-0"
               }`}
           >
+            <span className="flex h-2 w-2 rounded-full bg-[#4285F4] animate-glow-pulse" />
             Featured Projects
           </div>
-          <ScrollFloat
-            containerClassName="mt-6"
-            textClassName="font-serif text-3xl font-bold text-[#e3e3e3] text-balance md:text-5xl"
+          <div
+            className={`mt-6 font-serif text-3xl font-bold text-[#e3e3e3] md:text-5xl italic wrap-break-word ${isInView ? "animate-fade-in-up animation-delay-100" : "opacity-0"}`}
           >
             Selected work that speaks for itself
-          </ScrollFloat>
+          </div>
           <p
             className={`mt-4 text-lg leading-relaxed text-[#9aa0a6] text-pretty ${isInView ? "animate-fade-in-up animation-delay-200" : "opacity-0"
               }`}
@@ -129,7 +128,7 @@ export function Projects() {
         </div>
 
         {/* Projects Grid */}
-        <div className={`mt-16 grid gap-8 md:grid-cols-2 lg:gap-10 ${isInView ? "animate-fade-in-up animation-delay-300" : "opacity-0"}`}>
+        <div className={`mt-16 grid gap-12 md:grid-cols-2 lg:gap-12 ${isInView ? "animate-fade-in-up animation-delay-300" : "opacity-0"}`}>
           {projects.map((project, index) => (
             <a 
               key={project.name}
@@ -137,20 +136,57 @@ export function Projects() {
               id={`project-${index + 1}`}
               className="group block"
             >
-              <div
-                className="relative flex flex-col overflow-hidden rounded-3xl border bg-card transition-all duration-500 h-full shadow-xl hover:-translate-y-2"
-                style={{
-                  borderColor: `${project.color}25`,
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 25px 50px ${project.color}50`;
-                  e.currentTarget.style.borderColor = `${project.color}60`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.3)';
-                  e.currentTarget.style.borderColor = `${project.color}25`;
-                }}
-              >
+              <div className="relative">
+                {/* Ultra dense foggy glow background - multiple layers wrapping all borders */}
+                <div 
+                  className="absolute -inset-8 rounded-[40px] opacity-100 blur-[60px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${project.color}FF 0%, ${project.color}EE 15%, ${project.color}CC 30%, ${project.color}AA 45%, transparent 70%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-7 rounded-[38px] opacity-100 blur-[50px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${project.color}FF 0%, ${project.color}DD 18%, ${project.color}BB 35%, ${project.color}99 48%, transparent 68%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-6 rounded-[36px] opacity-100 blur-[40px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${project.color}FF 0%, ${project.color}DD 20%, ${project.color}BB 38%, ${project.color}88 50%, transparent 65%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-5 rounded-[34px] opacity-100 blur-[30px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${project.color}FF 0%, ${project.color}CC 25%, ${project.color}AA 42%, ${project.color}77 55%, transparent 62%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-4 rounded-[32px] opacity-100 blur-[20px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${project.color}FF 0%, ${project.color}BB 30%, ${project.color}99 45%, ${project.color}66 58%, transparent 60%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-3 rounded-[30px] opacity-100 blur-[15px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${project.color}FF 0%, ${project.color}AA 35%, ${project.color}88 48%, ${project.color}55 60%, transparent 58%)`,
+                  }}
+                />
+                
+                {/* Card Content */}
+                <div
+                  className="relative flex flex-col overflow-hidden rounded-3xl border border-[#303134] bg-[#1e1f20] transition-all duration-300 h-full hover:-translate-y-2"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 20px 40px ${project.color}70, 0 0 100px ${project.color}60`;
+                    e.currentTarget.style.borderColor = `${project.color}`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.borderColor = '#303134';
+                  }}
+                >
                 {/* Project Image */}
                 <div
                   className="relative h-64 w-full shrink-0 overflow-hidden"
@@ -163,7 +199,7 @@ export function Projects() {
                     alt={project.name}
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-linear-to-t from-card via-card/50 to-transparent" />
+                  <div className="absolute inset-0 bg-linear-to-t from-[#0a0a0a] via-[#0a0a0a]/50 to-transparent" />
                   
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4">
@@ -192,7 +228,7 @@ export function Projects() {
 
                 {/* Project Info */}
                 <div className="flex flex-1 flex-col p-8">
-                  <h3 className="text-3xl font-bold text-[#e3e3e3] group-hover:text-white transition-colors">
+                  <h3 className="text-3xl font-bold text-[#e3e3e3] hover:text-white transition-colors">
                     {project.name}
                   </h3>
                   <p className="mt-3 text-base leading-relaxed text-[#9aa0a6]">
@@ -200,7 +236,7 @@ export function Projects() {
                   </p>
 
                   {/* Metrics Grid */}
-                  <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-[#303134] bg-[#1a1b1c] p-6">
+                  <div className="mt-6 grid grid-cols-2 gap-4 rounded-2xl border border-[#1a1a1a] bg-[#050505] p-6">
                     <div className="flex items-center gap-3">
                       <div 
                         className="flex h-10 w-10 items-center justify-center rounded-xl transition-transform group-hover:scale-110"
@@ -270,6 +306,7 @@ export function Projects() {
                       </span>
                     ))}
                   </div>
+                </div>
                 </div>
               </div>
             </a>

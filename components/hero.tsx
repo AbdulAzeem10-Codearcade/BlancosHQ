@@ -4,7 +4,6 @@ import { ArrowRight, Code2, Smartphone, Brain, Cloud, Palette, Workflow } from "
 import { AnimatedCounter } from "./animated-counter"
 import { useInView } from "@/hooks/use-in-view"
 import { Typewriter } from "./ui/typewriter"
-import Aurora from "./ui/aurora"
 
 const capabilities = [
   { icon: Code2, label: "Web Development", glow: "glow-border-blue" },
@@ -28,21 +27,8 @@ export function Hero() {
     <section
       id="home"
       ref={ref}
-      className="relative overflow-hidden bg-background pt-40 pb-20 md:pt-48 md:pb-32"
+      className="relative overflow-hidden bg-[#000000] pt-40 pb-20 md:pt-48 md:pb-32"
     >
-      {/* Aurora Background - Google Colors */}
-      <div className="absolute inset-0 w-full h-full opacity-70">
-        <Aurora
-          colorStops={["#4285F4", "#34A853", "#FBBC05", "#EA4335"]}
-          amplitude={1.5}
-          blend={0.7}
-          speed={0.8}
-        />
-      </div>
-
-      {/* Gradient Overlay for better text readability */}
-      <div className="absolute inset-0 bg-linear-to-b from-transparent via-background/40 to-background" />
-
       <div className="relative mx-auto max-w-7xl px-6 z-10">
         {/* Badge */}
         <div className={`flex justify-center mb-8 ${isInView ? "animate-fade-in-up" : "opacity-0"}`}>
@@ -58,9 +44,9 @@ export function Hero() {
             }`}
         >
           Building Future-Ready{" "}
-          <span className="block mt-2 h-[1.2em]">
+          <span className="block mt-2 h-[1.2em] relative">
             <Typewriter
-              className="bg-linear-to-r from-[#4285F4] via-[#34A853] to-[#FBBC05] bg-clip-text text-transparent animate-gradient-x"
+              className="bg-gradient-to-r from-[#EA4335] via-[#4285F4] via-[#34A853] to-[#FBBC05] bg-clip-text text-transparent animate-gradient-x typewriter-glow-gradient"
               words={[
                 "Digital Solutions",
                 "Web Solutions",

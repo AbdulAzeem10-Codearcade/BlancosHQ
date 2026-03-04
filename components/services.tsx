@@ -12,7 +12,6 @@ import {
 } from "lucide-react"
 import { useInView } from "@/hooks/use-in-view"
 import { SectionGlow } from "./section-glow"
-import ScrollFloat from "./ui/scroll-float"
 
 const services = [
   {
@@ -113,23 +112,23 @@ export function Services() {
 
   return (
     <>
-      <section id="services" ref={ref} className="relative overflow-hidden bg-background py-24 md:py-32">
+      <section id="services" ref={ref} className="relative overflow-hidden bg-[#000000] py-24 md:py-32">
         <SectionGlow variant="services" />
         <div className="relative mx-auto max-w-7xl px-6">
           {/* Section Header */}
           <div className="mx-auto max-w-3xl text-center">
             <div
-              className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-[#28292a] px-4 py-1.5 text-sm font-medium text-[#8ab4f8] ${isInView ? "animate-fade-in-up" : "opacity-0"
+              className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-card px-4 py-1.5 text-sm font-medium text-[#9aa0a6] animate-fast-blink ${isInView ? "animate-fade-in-up" : "opacity-0"
                 }`}
             >
+              <span className="flex h-2 w-2 rounded-full bg-[#EA4335] animate-glow-pulse" />
               Our Services
             </div>
-            <ScrollFloat
-              containerClassName="mt-6"
-              textClassName="font-serif text-3xl font-bold text-[#e3e3e3] text-balance md:text-5xl"
+            <div
+              className={`mt-6 font-serif text-3xl font-bold text-[#e3e3e3] md:text-5xl italic wrap-break-word ${isInView ? "animate-fade-in-up animation-delay-100" : "opacity-0"}`}
             >
               Everything you need to launch and scale
-            </ScrollFloat>
+            </div>
             <p
               className={`mt-4 text-lg leading-relaxed text-[#9aa0a6] text-pretty ${isInView ? "animate-fade-in-up animation-delay-200" : "opacity-0"
                 }`}
@@ -140,28 +139,43 @@ export function Services() {
           </div>
 
           {/* Services Grid */}
-          <div className="mt-16 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-3">
             {services.map((service, i) => (
-              <div
-                key={service.title}
-                onClick={() => setSelectedService(service)}
-                className={`magic-border group flex flex-col justify-between overflow-hidden rounded-3xl border bg-card transition-all duration-500 hover:-translate-y-2 cursor-pointer ${isInView ? "animate-fade-in-up" : "opacity-0"
-                  }`}
-                style={{ 
-                  animationDelay: `${(i + 2) * 100}ms`,
-                  borderColor: `${service.color}25`
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 20px 40px ${service.color}40`;
-                  e.currentTarget.style.borderColor = `${service.color}60`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.borderColor = `${service.color}25`;
-                }}
-              >
+              <div key={service.title} className="relative h-full">
+                {/* Google-style subtle glow - soft and elegant */}
+                <div 
+                  className="absolute -inset-20 rounded-[56px] opacity-30 blur-[140px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${service.color}50 0%, ${service.color}30 25%, transparent 60%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-12 rounded-[48px] opacity-40 blur-[100px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${service.color}40 0%, ${service.color}20 30%, transparent 65%)`,
+                  }}
+                />
+                
+                <div
+                  onClick={() => setSelectedService(service)}
+                  className={`relative group flex flex-col h-full overflow-hidden rounded-3xl border border-[#303134] bg-[#1e1f20] transition-all duration-300 hover:-translate-y-2 cursor-pointer ${isInView ? "animate-fade-in-up" : "opacity-0"
+                    }`}
+                  style={{ 
+                    animationDelay: `${(i + 2) * 100}ms`,
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 20px 40px ${service.color}30, 0 0 80px ${service.color}20`;
+                    e.currentTarget.style.borderColor = `${service.color}80`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.borderColor = '#303134';
+                  }}
+                >
                 {/* Image placeholder with color glow */}
-                <div className="img-placeholder relative h-48 w-full flex items-center justify-center border-b border-[#303134] overflow-hidden">
+                <div className="img-placeholder relative h-48 w-full flex items-center justify-center border-b overflow-hidden"
+                  style={{ borderColor: `${service.color}20` }}
+                >
                   <div className="relative z-10 flex flex-col items-center gap-3">
                     <div
                       className="flex h-16 w-16 items-center justify-center rounded-2xl transition-transform group-hover:scale-110"
@@ -194,6 +208,7 @@ export function Services() {
                   </div>
 
                   <p className="mt-4 text-center text-xs text-[#9aa0a6]">Click to learn more</p>
+                </div>
                 </div>
               </div>
             ))}

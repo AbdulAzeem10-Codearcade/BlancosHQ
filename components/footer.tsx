@@ -13,7 +13,7 @@ const quickLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative overflow-hidden border-t border-[#303134] bg-background">
+    <footer className="relative overflow-hidden border-t border-[#303134] bg-[#000000]">
       <SectionGlow variant="footer" />
       <div className="relative mx-auto max-w-7xl px-6 py-16">
         <div className="grid grid-cols-1 gap-12 md:grid-cols-3">

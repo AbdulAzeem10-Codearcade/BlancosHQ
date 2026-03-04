@@ -54,20 +54,21 @@ export function Team() {
 
   return (
     <>
-      <section ref={ref} className="relative overflow-hidden bg-background py-24 md:py-32">
+      <section ref={ref} className="relative overflow-hidden bg-[#000000] py-24 md:py-32">
         <SectionGlow variant="team" />
         <div className="relative mx-auto max-w-7xl px-6">
           {/* Section Header */}
           <div className="mx-auto max-w-3xl text-center">
             <div
-              className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-[#28292a] px-4 py-1.5 text-sm font-medium text-[#8ab4f8] ${isInView ? "animate-fade-in-up" : "opacity-0"
+              className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-card px-4 py-1.5 text-sm font-medium text-[#9aa0a6] animate-fast-blink ${isInView ? "animate-fade-in-up" : "opacity-0"
                 }`}
             >
+              <span className="flex h-2 w-2 rounded-full bg-[#FBBC05] animate-glow-pulse" />
               Our Team
             </div>
             <ScrollFloat
               containerClassName="mt-6"
-              textClassName="font-serif text-3xl font-bold text-[#e3e3e3] text-balance md:text-5xl"
+              textClassName="font-serif text-3xl font-bold text-[#e3e3e3] md:text-5xl italic break-words"
             >
               Meet the engineers behind the magic
             </ScrollFloat>
@@ -81,26 +82,64 @@ export function Team() {
           </div>
 
           {/* Team Cards */}
-          <div className="mt-16 grid grid-cols-1 gap-8 md:grid-cols-3">
+          <div className="mt-16 grid grid-cols-1 gap-12 md:grid-cols-3">
             {teamMembers.map((member, i) => (
-              <div
-                key={member.name}
-                onClick={() => setSelectedMember(member)}
-                className={`magic-border group rounded-3xl border bg-card p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-2xl ${isInView ? "animate-fade-in-up" : "opacity-0"
-                  }`}
-                style={{ 
-                  animationDelay: `${(i + 2) * 150}ms`,
-                  borderColor: `${member.color}25`
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.boxShadow = `0 20px 40px ${member.color}40`;
-                  e.currentTarget.style.borderColor = `${member.color}60`;
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.boxShadow = 'none';
-                  e.currentTarget.style.borderColor = `${member.color}25`;
-                }}
-              >
+              <div key={member.name} className="relative h-full">
+                {/* Ultra dense foggy glow background - multiple layers wrapping all borders */}
+                <div 
+                  className="absolute -inset-8 rounded-[40px] opacity-100 blur-[60px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${member.color}FF 0%, ${member.color}EE 15%, ${member.color}CC 30%, ${member.color}AA 45%, transparent 70%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-7 rounded-[38px] opacity-100 blur-[50px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${member.color}FF 0%, ${member.color}DD 18%, ${member.color}BB 35%, ${member.color}99 48%, transparent 68%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-6 rounded-[36px] opacity-100 blur-[40px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${member.color}FF 0%, ${member.color}DD 20%, ${member.color}BB 38%, ${member.color}88 50%, transparent 65%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-5 rounded-[34px] opacity-100 blur-[30px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${member.color}FF 0%, ${member.color}CC 25%, ${member.color}AA 42%, ${member.color}77 55%, transparent 62%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-4 rounded-[32px] opacity-100 blur-[20px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${member.color}FF 0%, ${member.color}BB 30%, ${member.color}99 45%, ${member.color}66 58%, transparent 60%)`,
+                  }}
+                />
+                <div 
+                  className="absolute -inset-3 rounded-[30px] opacity-100 blur-[15px] pointer-events-none"
+                  style={{
+                    background: `radial-gradient(circle at center, ${member.color}FF 0%, ${member.color}AA 35%, ${member.color}88 48%, ${member.color}55 60%, transparent 58%)`,
+                  }}
+                />
+                
+                <div
+                  onClick={() => setSelectedMember(member)}
+                  className={`relative magic-border group rounded-3xl border bg-card p-8 transition-all duration-300 cursor-pointer hover:-translate-y-2 hover:shadow-2xl ${isInView ? "animate-fade-in-up" : "opacity-0"
+                    }`}
+                  style={{ 
+                    animationDelay: `${(i + 2) * 150}ms`,
+                    borderColor: `${member.color}25`
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 20px 40px ${member.color}80, 0 0 100px ${member.color}70`;
+                    e.currentTarget.style.borderColor = `${member.color}60`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = 'none';
+                    e.currentTarget.style.borderColor = `${member.color}25`;
+                  }}
+                >
                 {/* Avatar Placeholder with color glow */}
                 <div
                   className="img-placeholder mb-6 flex h-24 w-24 items-center justify-center rounded-full border mx-auto transition-transform group-hover:scale-110"
@@ -195,6 +234,7 @@ export function Team() {
                 </div>
 
                 <p className="mt-4 text-center text-xs text-[#9aa0a6]">Click to view full profile</p>
+              </div>
               </div>
             ))}
           </div>

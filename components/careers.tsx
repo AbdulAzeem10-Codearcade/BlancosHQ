@@ -36,20 +36,21 @@ export function Careers() {
   const { ref, isInView } = useInView()
 
   return (
-    <section id="careers" ref={ref} className="relative overflow-hidden bg-background py-24 md:py-32">
+    <section id="careers" ref={ref} className="relative overflow-hidden bg-[#000000] py-24 md:py-32">
       <SectionGlow variant="careers" />
       <div className="relative mx-auto max-w-7xl px-6">
         {/* Section Header */}
         <div className="mx-auto max-w-3xl text-center">
           <div
-            className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-[#28292a] px-4 py-1.5 text-sm font-medium text-[#8ab4f8] ${isInView ? "animate-fade-in-up" : "opacity-0"
+            className={`inline-flex items-center gap-2 rounded-full border border-[#303134] bg-card px-4 py-1.5 text-sm font-medium text-[#9aa0a6] animate-fast-blink ${isInView ? "animate-fade-in-up" : "opacity-0"
               }`}
           >
+            <span className="flex h-2 w-2 rounded-full bg-[#EA4335] animate-glow-pulse" />
             Careers
           </div>
           <ScrollFloat
             containerClassName="mt-6"
-            textClassName="font-serif text-3xl font-bold text-[#e3e3e3] text-balance md:text-5xl"
+            textClassName="font-serif text-3xl font-bold text-[#e3e3e3] md:text-5xl italic break-words"
           >
             Join our growing team
           </ScrollFloat>
